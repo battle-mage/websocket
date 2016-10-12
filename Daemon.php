@@ -163,6 +163,11 @@ abstract class Daemon extends Generic
 
     protected function _decode($connectionId)
     {
+        // if connection doesn't exist anymore - we should not try to access data
+        if (!isset($this->_read[$connectionId])){
+            return false;
+        }
+        
         $data = $this->_read[$connectionId];
 
         if (strlen($data) < 2) return false;
